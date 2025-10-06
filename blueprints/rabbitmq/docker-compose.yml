@@ -10,8 +10,14 @@ services:
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
     ports:
-      - 15672
-      - 5672
+      - "15672:15672"   # management UI
+      - "5672:5672"     # AMQP broker
+    networks:
+      - dokploy-network
 
 volumes:
   rabbitmq-data: {}
+
+networks:
+  dokploy-network:
+    external: true   # use the existing dokploy-network created by Dokploy
